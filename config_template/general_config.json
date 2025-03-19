@@ -44,10 +44,6 @@
         ],
         "rules": [
             {
-                "outbound": "any",
-                "server": "dns_direct"
-            },
-            {
                 "clash_mode": "direct",
                 "server": "dns_direct"
             },
@@ -56,39 +52,16 @@
                 "server": "dns_proxy"
             },
             {
-                "process_name": [
-                    "TencentMeeting",
-                    "NemoDesktop",
-                    "ToDesk",
-                    "ToDesk_Service",
-                    "WeChat",
-                    "Tailscale",
-                    "wireguard-go",
-                    "Tunnelblick",
-                    "softwareupdated",
-                    "kubectl"
-                ],
-                "server": "dns_direct"
-            },
-            {
-                "domain_suffix": [
-                    "icloudnative.io",
-                    "fuckcloudnative.io",
-                    "sealos.io",
-                    "cdn.jsdelivr.net"
-                ],
-                "server": "dns_direct"
-            },
-            {
-                "ip_cidr": [
-                    "10.0.0.0/24",
-                    "192.168.0.1"
-                ],
+                "rule_set": "geosite-cn",
                 "server": "dns_direct"
             },
             {
                 "rule_set": "geosite-geolocation-!cn",
                 "server": "dns_proxy"
+            },
+            {
+                "outbound": "any",
+                "server": "dns_direct"
             }
         ],
         "final": "dns_proxy",
@@ -99,11 +72,7 @@
             "type": "mixed",
             "tag": "mixed-in",
             "listen": "0.0.0.0",
-            "listen_port": 7890,
-            "tcp_fast_open": false,
-            "tcp_multi_path": false,
-            "udp_fragment": false,
-            "set_system_proxy": true
+            "listen_port": 7890
         },
         {
             "type": "tun",
@@ -346,6 +315,12 @@
                 "outbound": "Proxy"
             },
             {
+                "process_name": [
+                    "TIM.exe"
+                ],
+                "outbound": "direct"
+            },
+            {
                 "domain": [
                     "clash.razord.top",
                     "yacd.metacubex.one",
@@ -368,6 +343,16 @@
                     "geosite-cn"
                 ],
                 "outbound": "China"
+            },
+            {
+                "inbound": "mixed-in",
+                "clash_mode": "rule",
+                "outbound": "Proxy"
+            },
+            {
+                "inbound": "tun-in",
+                "clash_mode": "rule",
+                "outbound": "direct"
             }
         ],
         "rule_set": [
